@@ -24,7 +24,7 @@ end
 
 function word_to_simulation(::Val{:buoyancy_driven}, word;
                             pad_to_square = true,
-                            architecture = CPU(),
+                            architecture = GPU(),
                             extent = (1, 1),
                             halo = (5, 5),
                             topology = (Periodic, Flat, Bounded),
