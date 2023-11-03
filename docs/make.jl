@@ -13,11 +13,11 @@ const EXAMPLES_DIR = joinpath(@__DIR__, "..", "examples")
 const OUTPUT_DIR   = joinpath(@__DIR__, "src/literated")
 
 examples = [
-  "hello_flow.jl",
+  "hello_flow.md",
 ]
 
 for example in examples
-  withenv("GITHUB_REPOSITORY" => "FourierFlows/GeophysicalFlowsDocumentation") do
+  withenv("GITHUB_REPOSITORY" => "navidcy/TurbulentWords.jl") do
     example_filepath = joinpath(EXAMPLES_DIR, example)
     withenv("JULIA_DEBUG" => "Literate") do
       Literate.markdown(example_filepath, OUTPUT_DIR;
