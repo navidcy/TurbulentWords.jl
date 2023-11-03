@@ -66,31 +66,36 @@ n = Observable(1)
 fig = Figure(resolution = (600, 600))
 ax = Axis(fig[1, 1]; limits = ((0, Lx), (0, Ly)), aspect = AxisAspect(1))
 
-ζ = @lift interior(ζ_timeseries[$n], :, :, 1)
+ζₙ = @lift interior(ζ_timeseries[$n], :, :, 1)
 
-heatmap!(ax, x, y, ζ; colormap = :balance, colorrange = (-ζmax, ζmax))
+heatmap!(ax, x, y, ζₙ; colormap = :balance, colorrange = (-ζmax, ζmax))
 
-hidedecorations!(ax_ω)
-hidespines!(ax_ω)
+hidedecorations!(ax)
+hidespines!(ax)
 
 fig
 
-still_frames = 20 # some still frames in the beginning and end
+still_frames = 20 # add some still frames in the beginning and end
 
-record(fig, filename * ".mp4", framerate=60) do io
+record(fig, filename * ".gif", framerate=60) do io
     for _ in 1:still_frames
         recordframe!(io)
     end
+
+    @info "loop forward"
     for i in 1:4:length(times)
         @info i
         n[] = i
         recordframe!(io)
     end
+
+    @info "loop backward"
     for i in length(times):-4:1
         @info i
         n[] = i
         recordframe!(io)
     end
+
     for _ in 1:still_frames
         recordframe!(io)
     end
