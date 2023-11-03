@@ -6,7 +6,7 @@ Make turbulence from words.
 
 ## Installation
 
-To install, from a Julia REPL:
+To install from a Julia REPL:
 
 ```julia
 julia> ]
@@ -18,7 +18,7 @@ pkg> instantiate
 
 ## Usage
 
-A simple word:
+### A turbulent word
 
 ```julia
 using TurbulentWords
@@ -26,20 +26,21 @@ using CairoMakie
 
 fig = Figure(resolution = (2200, 450))
 ax = Axis(fig[1, 1])
-heatmap!(ax, word_to_array("A WORDY PHRASE", hpad=25))
+word = word_to_array("TUMULTUOUS", hpad=25)
+heatmap!(ax, word)
 fig
 ```
 
 ![demo](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/d9c0696a-61a1-44d6-a5bc-00e99a59ed9b)
 
-We can also create a two-dimensional incompressible flow from a word and use it to initialize a fluid simulation.
+### A turbulent flow
 
 ```julia
 using TurbulentWords
+using Oceananigans
 using CairoMakie
 
-ζ = word_to_array("CliMA", multiplicative_factors = (1, -1, 1, -1, 1), pad_to_square=true) # vorticity
-u, v, ψ = compute_velocities_and_streamfunction_from_vorticityword(ζ)
+u, v, ψ, ζ = word_to_flow("TEMPESTUOUS")
 
 fig = Figure(resolution = (1200, 1200))
 
@@ -48,12 +49,37 @@ ax2 = Axis(fig[1, 2], aspect=1, title="streamfunction")
 ax3 = Axis(fig[2, 1], aspect=1, title="u")
 ax4 = Axis(fig[2, 2], aspect=1, title="v")
 
-heatmap!(ax1, ζ, colormap=:balance)
-heatmap!(ax2, ψ, colormap=:speed)
-heatmap!(ax3, u, colormap=:balance)
-heatmap!(ax4, v, colormap=:balance)
+heatmap!(ax1, interior(ζ, :, :, 1), colormap=:balance)
+heatmap!(ax2, interior(ψ, :, :, 1), colormap=:speed)
+heatmap!(ax3, interior(u, :, :, 1), colormap=:balance)
+heatmap!(ax4, interior(v, :, :, 1), colormap=:balance)
 
 fig
 ```
 
 ![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/8b294b74-ef50-4ac8-84bf-f2b05483f7e1)
+
+### A turbulent simulation
+
+```julia
+using TurbulentWords
+using Oceananigans
+using CairoMakie
+
+simulation = word_to_simulation("STORMY")
+simulation.stop_time = 0.1
+run!(simulation)
+```
+
+### Another turbulent simulation
+
+```julia
+using TurbulentWords
+using Oceananigans
+using CairoMakie
+
+simulation = word_to_simulation("ROILING", dynamics=:buoyancy_driven)
+simulation.stop_time = 0.1
+run!(simulation)
+```
+
