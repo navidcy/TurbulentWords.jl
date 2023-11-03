@@ -17,13 +17,11 @@ examples = [
 ]
 
 for example in examples
-  withenv("GITHUB_REPOSITORY" => "navidcy/TurbulentWords.jl") do
     example_filepath = joinpath(EXAMPLES_DIR, example)
     withenv("JULIA_DEBUG" => "Literate") do
-      Literate.markdown(example_filepath, OUTPUT_DIR;
-                        flavor = Literate.DocumenterFlavor(), execute = true)
+        Literate.markdown(example_filepath, OUTPUT_DIR;
+                          flavor = Literate.DocumenterFlavor(), execute = true)
     end
-  end
 end
 
 example_pages = [
@@ -85,11 +83,9 @@ for file in files
     rm(file)
 end
 
-withenv("GITHUB_REPOSITORY" => "navidcy/TurbulentWords.jl") do
-  deploydocs(       repo = "github.com/navidcy/TurbulentWords.jl.git",
-                versions = ["stable" => "v^", "dev" => "dev", "v#.#.#"],
-            push_preview = false,
-               forcepush = true,
-               devbranch = "main"
-            )
-end
+deploydocs(       repo = "github.com/navidcy/TurbulentWords.jl.git",
+              versions = ["stable" => "v^", "dev" => "dev", "v#.#.#"],
+          push_preview = false,
+              forcepush = true,
+              devbranch = "main"
+          )
