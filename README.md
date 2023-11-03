@@ -6,7 +6,7 @@ Simple example:
 
 ```julia
 using TurbulentWords
-using GLMakie
+using CairoMakie
 
 fig = Figure(resolution = (2200, 450))
 ax = Axis(fig[1, 1])
@@ -20,7 +20,7 @@ We can also create a two-dimensional incompressible flow from a word:
 
 ```julia
 using TurbulentWords
-using GLMakie
+using CairoMakie
 
 ζ = word_to_array("CLiMA", multiplicative_factors = (1, -1, 1, -1, 1), pad_to_square=true) # vorticity
 u, v, ψ = compute_velocities_and_streamfunction_from_vorticityword(ζ)
