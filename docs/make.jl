@@ -13,7 +13,7 @@ const EXAMPLES_DIR = joinpath(@__DIR__, "..", "examples")
 const OUTPUT_DIR   = joinpath(@__DIR__, "src/literated")
 
 examples = [
-  "hello_flow.md",
+  "hello_flow.jl",
 ]
 
 for example in examples
@@ -27,7 +27,7 @@ for example in examples
 end
 
 example_pages = [
-    "Hello flow" => "literated/hellow_flow.md",
+    "Hello flow" => "literated/hello_flow.md",
 ]
 
 appendix_pages = [
