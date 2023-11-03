@@ -25,7 +25,7 @@ function find_biggest_size()
         Ny = max(Ny, ny)
     end
 
-    return Mx, My
+    return Nx, Ny
 end
 
 Nx, Ny = find_biggest_size()
@@ -54,7 +54,7 @@ function word_to_array(word;
                        hpad = 20,
                        pad_to_square = false,
                        margin_pad = 50)
-    
+
     Nletters = length(word)
 
     word_tuple = ntuple(Nletters) do n

@@ -1,6 +1,6 @@
 module TurbulentWords
 
-using Makie
+using CairoMakie
 using Oceananigans
 using Oceananigans.Solvers: FFTBasedPoissonSolver, solve!
 

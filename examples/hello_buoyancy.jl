@@ -10,7 +10,7 @@ b = model.tracers
 outputs = (; b)
 filename = "hello_buoyancy.jld2"
 simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
-                                                      schedule = TimeInterval(0.1),
+                                                      schedule = TimeInterval(0.01),
                                                       filename = filename,
                                                       overwrite_existing = true)
 
@@ -28,7 +28,7 @@ n = Observable(1)
 bₙ = @lift interior(bt[$n], :, :, 1)
 
 bmax = 0.8
-heatmap!(ax, x, y, bₙ; colormap = :balance, colorrange = (-bmax, bmax))
+heatmap!(ax, bₙ; colormap = :balance, colorrange = (-bmax, bmax))
 
 stillframes = 20
 framerate = 60
@@ -36,6 +36,7 @@ movingframes = length(times)
 
 record(fig, filename * ".gif", framerate=60) do io
     [recordframe!(io) for _ = 1:stillframes]
+
     for nn in 1:movingframes
         n[] = nn
         recordframe!(io)
@@ -48,4 +49,3 @@ record(fig, filename * ".gif", framerate=60) do io
 
     [recordframe!(io) for _ = 1:stillframes]
 end
-

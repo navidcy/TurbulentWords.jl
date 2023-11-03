@@ -24,7 +24,7 @@ end
 
 function word_to_simulation(::Val{:buoyancy_driven}, word;
                             pad_to_square = true,
-                            architecture = Oceananigans.Architectures.CPU(),
+                            architecture = CPU(),
                             extent = (1, 1),
                             halo = (5, 5),
                             topology = (Periodic, Flat, Bounded),
@@ -54,7 +54,7 @@ end
 function add_wizard_and_progress!(simulation)
     wizard = TimeStepWizard(cfl=0.8, max_change=1.1)
     simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(5))
-    
+
     progress(sim) = @info string("Iteration: ", iteration(sim), ", time: ", time(sim), ", Δt: ", sim.Δt)
     simulation.callbacks[:progress] = Callback(progress, IterationInterval(10))
 

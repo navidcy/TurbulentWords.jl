@@ -14,8 +14,6 @@ function word_to_flow(word::AbstractArray;
                       topology = (Periodic, Periodic, Flat),
                       kw...)
 
-    word = ensure_even_sized_word(word)
-
     # Create the word grid
     Nx, Ny = size(word)
     grid = RectilinearGrid(architecture, size=(Nx, Ny); extent, halo, topology)
@@ -25,7 +23,7 @@ function word_to_flow(word::AbstractArray;
     ψ = CenterField(grid)
     ζ = solver.storage .= word
 
-    # solve for streamfunction
+    # solve for streamfunction ψ
     solve!(ψ, solver, ζ)
 
     # Interpolate to ffc
