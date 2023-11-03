@@ -43,7 +43,7 @@ stillframes = 20
 framerate = 60
 movingframes = length(times)
 
-record(fig, filename * ".mp4", framerate=60) do io
+record(fig, filename * ".mp4", framerate=32) do io
     [recordframe!(io) for _ = 1:stillframes]
 
     for nn in 1:movingframes

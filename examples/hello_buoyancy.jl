@@ -7,10 +7,10 @@ using CairoMakie
 # We construct a simulation with a word and run it.
 
 simulation = word_to_simulation("hello", dynamics=:buoyancy_driven, pad_to_square=true)
-simulation.stop_time = 0.3
+simulation.stop_time = 0.8
 
 model = simulation.model
-b = model.tracers
+b = model.tracers.b
 outputs = (; b)
 filename = "hello_buoyancy"
 simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
@@ -43,7 +43,7 @@ stillframes = 20
 framerate = 60
 movingframes = length(times)
 
-record(fig, filename * ".mp4", framerate=60) do io
+record(fig, filename * ".mp4", framerate=32) do io
     [recordframe!(io) for _ = 1:stillframes]
 
     for nn in 1:movingframes
