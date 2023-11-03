@@ -46,14 +46,22 @@ function letter_to_array(letter; letter_Ny=Ny, hpad=20)
     return bigger_array
 end
 
+alternating(N) = [2isodd(n) - 1 for n = 1:N]
+
 function word_to_array(word;
-                       multiplicative_factors = Tuple(ones(length(word))),
+                       multiplicative_factors = ones(length(word)),
                        word_Ny = size(letter_to_array(word[1]), 2),
                        hpad = 20,
                        pad_to_square = false,
                        margin_pad = 50)
     
-    word_tuple = Tuple(factor .* letter_to_array(letter; letter_Ny = word_Ny, hpad) for (factor, letter) in zip(multiplicative_factors, word))
+    Nletters = length(word)
+
+    word_tuple = ntuple(Nletters) do n
+        letter = word[n]
+        factor = multiplicative_factors[n]
+        factor .* letter_to_array(letter; letter_Ny=word_Ny, hpad)
+    end
 
     Nx = sum(size(letter, 1) for letter in word_tuple)
     Ny = size(word_tuple[1], 2)
