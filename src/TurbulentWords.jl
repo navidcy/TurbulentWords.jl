@@ -2,7 +2,7 @@ module TurbulentWords
 
 using CairoMakie
 using Oceananigans
-using Statistics
+using FFTW
 using Oceananigans.Solvers: FFTBasedPoissonSolver, solve!
 using Oceananigans.BoundaryConditions: fill_halo_regions!
 

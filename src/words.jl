@@ -28,14 +28,13 @@ function find_biggest_size()
     return Nx, Ny
 end
 
-Nx, Ny = find_biggest_size()
+biggest_Nx, biggest_Ny = find_biggest_size()
 
-function letter_to_array(letter; letter_Ny=Ny, hpad=20)
+function letter_to_array(letter, Ny=biggest_Ny; hpad=20)
     letter_array = bitmap_to_array(letter)
 
     nx, ny = size(letter_array)
 
-    Ny = letter_Ny
     Nx = nx + 2hpad
 
     bigger_array = zeros(Nx, Ny)
@@ -51,30 +50,37 @@ alternating(N) = [2isodd(n) - 1 for n = 1:N]
 function word_to_array(word;
                        multiplicative_factors = ones(length(word)),
                        word_Ny = size(letter_to_array(word[1]), 2),
-                       hpad = 20,
-                       pad_to_square = false,
-                       margin_pad = 50)
+                       letter_pad::Int = 20,
+                       vpad::Int = 0,
+                       pad_to_square::Bool = false,
+                       hpad::Int = 50)
 
     Nletters = length(word)
 
     word_tuple = ntuple(Nletters) do n
         letter = word[n]
         factor = multiplicative_factors[n]
-        factor .* letter_to_array(letter; letter_Ny=word_Ny, hpad)
+        factor .* letter_to_array(letter, word_Ny, hpad=letter_pad)
     end
 
     Nx = sum(size(letter, 1) for letter in word_tuple)
     Ny = size(word_tuple[1], 2)
 
-    if margin_pad < 1
-        margin_pad = 1
-    end
+    # Write the word with horizontal padding
+    hpad = min(1, hpad)
+    side_margin = zeros(hpad, Ny)
+    word_array = deepcopy(side_margin)
 
-    word_array = zeros(margin_pad, Ny)
     for letter in word_tuple
         word_array = vcat(word_array, letter)
     end
-    word_array = vcat(word_array, zeros(margin_pad, Ny))
+
+    word_array = vcat(word_array, side_margin)
+    Nx = size(word_array, 1)
+
+    # Add vertical padding
+    top_and_bottom_margin = zeros(Nx, vpad)
+    word_array = hcat(top_and_bottom_margin, word_array, top_and_bottom_margin)
 
     if !pad_to_square
         return word_array
@@ -94,3 +100,4 @@ function word_to_array(word;
         end
     end
 end
+

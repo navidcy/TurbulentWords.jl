@@ -55,7 +55,18 @@ function add_wizard_and_progress!(simulation)
     wizard = TimeStepWizard(cfl=0.8, max_change=1.1)
     simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(5))
 
-    progress(sim) = @info string("Iteration: ", iteration(sim), ", time: ", time(sim), ", Δt: ", sim.Δt)
+    wall_clock = Ref(time_ns())
+
+    function progress(sim)
+        elapsed = 1e-9 * (time_ns() - wall_clock[])
+        @info string("Iteration: ", iteration(sim),
+                     ", time: ", time(sim),
+                     ", wall time: ", prettytime(elapsed),
+                     ", Δt: ", sim.Δt)
+        wall_clock[] = time_ns()
+        return nothing
+    end
+
     simulation.callbacks[:progress] = Callback(progress, IterationInterval(10))
 
     return nothing
