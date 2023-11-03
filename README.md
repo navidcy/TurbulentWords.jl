@@ -95,7 +95,30 @@ using Oceananigans
 using CairoMakie
 
 simulation = word_to_simulation("ROILING", dynamics=:buoyancy_driven)
-simulation.stop_time = 0.1
+simulation.stop_time = 0.3
 run!(simulation)
+
+b = simulation.model.tracers.b
+
+fig = Figure()
+ax = Axis(fig[1, 1])
+hidedecorations!(ax)
+heatmap!(ax, interior(b, :, 1, :), colormap=:balance)
+
+fig
 ```
+
+![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/bec3e795-a72f-43d5-a05d-3a65ec5852c2)
+
+It's too cool (hot?) to stop at just 0.3 though
+
+```julia
+simulation.stop_time = 0.5
+run!(simulation)
+heatmap!(ax, interior(b, :, 1, :), colormap=:balance)
+
+fig
+```
+
+![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/741739a4-2e39-4f2e-8cbf-0807d5d01faa)
 

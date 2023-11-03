@@ -7,14 +7,14 @@ using CairoMakie
 # We construct a simulation with a word and run it.
 
 simulation = word_to_simulation("hello", dynamics=:buoyancy_driven, pad_to_square=true)
-simulation.stop_time = 0.2
+simulation.stop_time = 0.35
 
 model = simulation.model
 b = model.tracers
 outputs = (; b)
 filename = "hello_buoyancy"
 simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
-                                                      schedule = TimeInterval(0.01),
+                                                      schedule = TimeInterval(0.02),
                                                       filename = filename * ".jld2",
                                                       overwrite_existing = true)
 
@@ -34,7 +34,7 @@ hidedecorations!(ax)
 hidespines!(ax)
 n = Observable(1)
 
-bₙ = @lift interior(bt[$n], :, :, 1)
+bₙ = @lift interior(bt[$n], :, 1, :)
 
 bmax = 0.8
 heatmap!(ax, bₙ; colormap = :balance, colorrange = (-bmax, bmax))
