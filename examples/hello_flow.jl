@@ -1,3 +1,5 @@
+# # Hello flow example
+
 using TurbulentWords
 using Oceananigans
 using CairoMakie
@@ -11,7 +13,11 @@ ax = Axis(fig[1, 1], aspect=1)
 heatmap!(ax, hi, colormap=:balance)
 fig
 
-#-
+# ## Convert word to flow
+
+# `word_to_flow` considers the word as the vertical vorticity of a two-dimensional flow
+# and then it computes the incompressible flow ``u`` and ``v``, as well as the streamfunction
+# ``\psi`` that correspond to that vorticity distribution.
 
 u, v, ψ, ζ = word_to_flow(hi)
 
