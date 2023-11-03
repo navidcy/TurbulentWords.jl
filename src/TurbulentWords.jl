@@ -3,7 +3,10 @@ module TurbulentWords
 using FourierFlows
 using CairoMakie
 
-export letter_to_array, word_to_array, compute_velocities_from_vorticityword
+export letter_to_array,
+       word_to_array,
+       compute_velocities_and_streamfunction_from_vorticityword,
+       compute_velocities_and_vorticity_from_streamfunctionword
 
 """
     bitmap_to_array(letter)
