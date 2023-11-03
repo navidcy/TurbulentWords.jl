@@ -22,7 +22,7 @@ We can also create a two-dimensional incompressible flow from a word:
 using TurbulentWords
 using CairoMakie
 
-ζ = word_to_array("CLiMA", multiplicative_factors = (1, -1, 1, -1, 1), pad_to_square=true) # vorticity
+ζ = word_to_array("CliMA", multiplicative_factors = (1, -1, 1, -1, 1), pad_to_square=true) # vorticity
 u, v, ψ = compute_velocities_and_streamfunction_from_vorticityword(ζ)
 
 fig = Figure(resolution = (1200, 1200))
@@ -40,4 +40,4 @@ heatmap!(ax4, v, colormap=:balance)
 fig
 ```
 
-![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/aa3d99e7-165f-4ea4-9ca8-a1d2dd6bb082)
+![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/8b294b74-ef50-4ac8-84bf-f2b05483f7e1)
