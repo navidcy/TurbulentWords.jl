@@ -1,4 +1,5 @@
 using TurbulentWords
+using Oceananigans
 using CairoMakie
 
 hi = word_to_array("hello",
