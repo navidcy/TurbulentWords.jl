@@ -40,14 +40,16 @@ using TurbulentWords
 using Oceananigans
 using CairoMakie
 
-u, v, ψ, ζ = word_to_flow("TEMPESTUOUS")
+u, v, ψ, ζ = word_to_flow("TEMPESTUOUS", vpad=50)
 
 fig = Figure(resolution = (1200, 1200))
 
-ax1 = Axis(fig[1, 1], aspect=1, title="vorticity")
-ax2 = Axis(fig[1, 2], aspect=1, title="streamfunction")
-ax3 = Axis(fig[2, 1], aspect=1, title="u")
-ax4 = Axis(fig[2, 2], aspect=1, title="v")
+ax1 = Axis(fig[1, 1], title="Vorticity")
+ax2 = Axis(fig[2, 1], title="Streamfunction")
+ax3 = Axis(fig[3, 1], title="u")
+ax4 = Axis(fig[4, 1], title="v")
+
+[hidedecorations!(ax) for ax in (ax1, ax2, ax3, ax4)]
 
 heatmap!(ax1, interior(ζ, :, :, 1), colormap=:balance)
 heatmap!(ax2, interior(ψ, :, :, 1), colormap=:speed)
@@ -57,7 +59,7 @@ heatmap!(ax4, interior(v, :, :, 1), colormap=:balance)
 fig
 ```
 
-![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/8b294b74-ef50-4ac8-84bf-f2b05483f7e1)
+![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/b20817ba-d8de-4b9a-95f1-666dd89d6181)
 
 ### A turbulent simulation
 
@@ -67,9 +69,23 @@ using Oceananigans
 using CairoMakie
 
 simulation = word_to_simulation("STORMY")
-simulation.stop_time = 0.1
+simulation.stop_time = 5
 run!(simulation)
+
+model = simulation.model
+u, v, w = model.velocities
+ζ = Field(∂x(v) - ∂y(u)) |> compute!
+
+fig = Figure()
+ax = Axis(fig[1, 1])
+hidedecorations!(ax)
+heatmap!(ax, interior(ζ, :, :, 1), colormap=:balance)
+
+fig
 ```
+
+![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/9f5c4f4c-4306-4dbc-a72f-2bf41c250b92)
+
 
 ### Another turbulent simulation
 
