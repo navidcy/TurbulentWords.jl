@@ -1,6 +1,5 @@
 using TurbulentWords
 using CairoMakie
-using Oceananigans
 
 hi = word_to_array("hello",
                    pad_to_square = true,
