@@ -24,9 +24,9 @@ pkg> instantiate
 using TurbulentWords
 using CairoMakie
 
-fig = Figure(resolution = (2200, 450))
+fig = Figure(resolution=(2400, 300))
 ax = Axis(fig[1, 1])
-word = word_to_array("TUMULTUOUS", hpad=25)
+word = word_to_array("TUMULTUOUS")
 heatmap!(ax, word)
 fig
 ```
