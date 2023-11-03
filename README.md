@@ -31,7 +31,7 @@ heatmap!(ax, word)
 fig
 ```
 
-![demo](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/d9c0696a-61a1-44d6-a5bc-00e99a59ed9b)
+<img width="1421" alt="image" src="https://github.com/navidcy/TurbulentWords.jl/assets/15271942/2902699a-db72-4e27-bfac-6c4cb4476fa1">
 
 ### A turbulent flow
 
