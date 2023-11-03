@@ -2,7 +2,9 @@ module TurbulentWords
 
 using CairoMakie
 using Oceananigans
+using Statistics
 using Oceananigans.Solvers: FFTBasedPoissonSolver, solve!
+using Oceananigans.BoundaryConditions: fill_halo_regions!
 
 export letter_to_array,
        word_to_array,

@@ -20,11 +20,14 @@ function word_to_flow(word::AbstractArray;
 
     solver = FFTBasedPoissonSolver(grid)
 
+    word .-= mean(word)
+
     ψ = CenterField(grid)
     ζ = solver.storage .= word
 
-    # solve for streamfunction ψ
+    # solve for streamfunction
     solve!(ψ, solver, ζ)
+    fill_halo_regions!(ψ)
 
     # Interpolate to ffc
     ψᶠᶠᶜ = @at (Face, Face, Center) identity(ψ)
