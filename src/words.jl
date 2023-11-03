@@ -1,7 +1,7 @@
 """
     bitmap_to_array(letter)
 
-Return an array of 1s and 0s that correspond to the bitmap
+Return an array of booleans that correspond to the bitmap
 pattern of the `letter` character provided.
 """
 function bitmap_to_array(letter)
@@ -14,15 +14,15 @@ function bitmap_to_array(letter)
 end
 
 function find_biggest_size()
-    Mx, My = 0, 0
+    Nx, Ny = 0, 0
 
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     for letter in alphabet
         letter_array = bitmap_to_array(letter)
-        mx, my = size(letter_array)
-        Mx = max(Mx, mx)
-        My = max(My, my)
+        nx, ny = size(letter_array)
+        Nx = max(Nx, nx)
+        Ny = max(Ny, ny)
     end
 
     return Mx, My
@@ -94,13 +94,3 @@ function word_to_array(word;
         end
     end
 end
-
-function ensure_even_sized_word(word)
-    Nx, Ny = size(word)
-
-    even_sized_word = zeros(Nx + mod(Nx, 2), Ny + mod(Ny, 2))
-    even_sized_word[1:Nx, 1:Ny] .= word
-
-    return even_sized_word
-end
-

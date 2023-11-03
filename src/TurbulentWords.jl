@@ -1,6 +1,6 @@
 module TurbulentWords
 
-using CairoMakie
+using Makie
 using Oceananigans
 using Oceananigans.Solvers: FFTBasedPoissonSolver, solve!
 
@@ -16,4 +16,3 @@ include("simulations.jl")
 include("movies.jl")
 
 end # module TurbulentWords
-

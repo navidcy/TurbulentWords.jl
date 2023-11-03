@@ -2,7 +2,7 @@
 
 julia_version = "1.9.3"
 manifest_format = "2.0"
-project_hash = "d4a78bc9b09df02e0c32377d67c68d91f5dabc33"
+project_hash = "0c386bd743e55e7a117f973c31f8a999b27aad92"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -502,12 +502,6 @@ weakdeps = ["StaticArrays"]
 
     [deps.ForwardDiff.extensions]
     ForwardDiffStaticArraysExt = "StaticArrays"
-
-[[deps.FourierFlows]]
-deps = ["CUDA", "DocStringExtensions", "FFTW", "Interpolations", "JLD2", "LinearAlgebra", "Random", "Reexport", "Statistics"]
-git-tree-sha1 = "672f89933a2d025c26fc41b9cd60769b1003d324"
-uuid = "2aec4490-903f-5c70-9b11-9bed06a700e1"
-version = "0.10.4"
 
 [[deps.FreeType]]
 deps = ["CEnum", "FreeType2_jll"]

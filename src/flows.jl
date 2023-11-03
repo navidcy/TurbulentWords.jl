@@ -8,7 +8,7 @@ function word_to_flow(word_str::String; kw...)
 end
 
 function word_to_flow(word::AbstractArray;
-                      architecture = Oceananigans.Architectures.CPU(),
+                      architecture = CPU(),
                       extent = (1, 1),
                       halo = (5, 5),
                       topology = (Periodic, Periodic, Flat),
@@ -25,6 +25,7 @@ function word_to_flow(word::AbstractArray;
     ψ = CenterField(grid)
     ζ = solver.storage .= word
 
+    # solve for streamfunction
     solve!(ψ, solver, ζ)
 
     # Interpolate to ffc
@@ -34,9 +35,9 @@ function word_to_flow(word::AbstractArray;
     ζᶠᶠᶜ = Field{Face, Face, Center}(grid)
     ζᶠᶠᶜ .= word
 
+    # compute velocities from streamfunction
     u = compute!(Field(-∂y(ψᶠᶠᶜ)))
     v = compute!(Field(+∂x(ψᶠᶠᶜ)))
 
     return u, v, ψᶠᶠᶜ, ζᶠᶠᶜ
 end
-

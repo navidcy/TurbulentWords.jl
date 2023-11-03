@@ -1,4 +1,3 @@
-
 function word_to_simulation(word; kw...)
     uᵢ, vᵢ, ψᵢ, ζᵢ = word_to_flow(word; kw...)
 
@@ -17,6 +16,3 @@ function word_to_simulation(word; kw...)
 
     return simulation
 end
-                                
-
-

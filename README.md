@@ -4,9 +4,6 @@ Make turbulence from words.
 
 ![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/b9efefc0-73c1-4206-9144-4c25af9ce25f)
 
-The above animation was created with [`examples/two_dimensional_turbulence.jl`](https://github.com/navidcy/TurbulentWords.jl/blob/main/examples/two_dimensional_turbulence.jl).
-
-
 ## Installation
 
 To install, from a Julia REPL:
