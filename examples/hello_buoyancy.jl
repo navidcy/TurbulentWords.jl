@@ -18,6 +18,7 @@ simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
 run!(simulation)
 
 bt = FieldTimeSeries(filename, "b")
+times = bt.times
 
 fig = Figure(resolution = (600, 600))
 ax = Axis(fig[1, 1])
