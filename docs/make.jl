@@ -57,6 +57,7 @@ makedocs(
      sitename = "TurbulentWords.jl",
       modules = [TurbulentWords],
        format = format,
+     warnonly = [:footnote, :cross_references],
       doctest = true,
         clean = true,
     checkdocs = :all,
