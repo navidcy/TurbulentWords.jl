@@ -10,6 +10,6 @@ To add the package and also to instantiate/build all the required dependencies
 
 ```julia
 julia> ]
-(v1.9) pkg> add https://github.com/josuemtzmo/TurbulentWords.jl.git
+(v1.9) pkg> add https://github.com/navidcy/TurbulentWords.jl.git
 (v1.9) pkg> instantiate
 ```
