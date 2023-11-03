@@ -1,6 +1,15 @@
 # TurbulentWords.jl
 
-Make turbulence from words.
+<p align="left">
+    <a href="https://navidcy.github.io/TurbulentWords/dev">
+        <img alt="latest docs" src="https://img.shields.io/badge/documentation-in%20development-orange">
+    </a>
+    <a href="https://github.com/SciML/ColPrac">
+      <img alt="ColPrac: Contributor's Guide on Collaborative Practices for Community Packages" src="https://img.shields.io/badge/ColPrac-Contributor's%20Guide-blueviolet">
+    </a>
+</p>
+
+*Make turbulence from words.*
 
 ![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/b9efefc0-73c1-4206-9144-4c25af9ce25f)
 
