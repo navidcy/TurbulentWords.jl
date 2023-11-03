@@ -60,18 +60,23 @@ function word_to_array(word;
                        multiplicative_factors = Tuple(ones(length(word))),
                        word_Ny = size(letter_to_array(word[1]), 2),
                        hpad = 20,
-                       pad_to_square = false)
+                       pad_to_square = false,
+                       margin_pad = 50)
     
     word_tuple = Tuple(factor .* letter_to_array(letter; letter_Ny = word_Ny, hpad) for (factor, letter) in zip(multiplicative_factors, word))
 
     Nx = sum(size(letter, 1) for letter in word_tuple)
     Ny = size(word_tuple[1], 2)
 
-    word_array = word_tuple[1]
+    if margin_pad < 1
+        margin_pad = 1
+    end
 
-    for letter in word_tuple[2:end]
+    word_array = zeros(margin_pad, Ny)
+    for letter in word_tuple
         word_array = vcat(word_array, letter)
     end
+    word_array = vcat(word_array, zeros(margin_pad, Ny))
 
     if !pad_to_square
         return word_array
@@ -101,39 +106,43 @@ function ensure_even_sized_word(word)
     return even_sized_word
 end
 
-function compute_velocities_and_vorticity_from_streamfunctionword(word)
+function compute_velocities_and_vorticity_from_streamfunctionword(word; Lx=2π, Ly=2π)
     word = ensure_even_sized_word(word)
     nx, ny = size(word)
 
-    grid = TwoDGrid(; nx, ny, Lx=nx, Ly=ny)
+    grid = TwoDGrid(; nx, ny, Lx, Ly)
 
     ψh = rfft(word)
+
     uh = @. - im * grid.l  * ψh
     vh = @.   im * grid.kr * ψh
+    ζh = @. - ζh * grid.Krsq
+
     u = irfft(uh, grid.nx)
     v = irfft(vh, grid.nx)
-
-    ζh = @. - ζh * grid.Krsq
+    ψ = irfft(ψh, grid.nx)
     ζ = irfft(ζh, grid.nx)
 
-    return u, v, ζ
+    return u, v, ψ, ζ
 end
 
-function compute_velocities_and_streamfunction_from_vorticityword(word)
+function compute_velocities_and_streamfunction_from_vorticityword(word; Lx=2π, Ly=2π)
     word = ensure_even_sized_word(word)
     nx, ny = size(word)
 
-    grid = TwoDGrid(; nx, ny, Lx=nx, Ly=ny)
+    grid = TwoDGrid(; nx, ny, Lx, Ly)
 
     ζh = rfft(word)
     ψh = @. - ζh * grid.invKrsq
-    ψ = irfft(ψh, grid.nx)
     uh = @.   im * grid.l  * grid.invKrsq * ζh
     vh = @. - im * grid.kr * grid.invKrsq * ζh
+
     u = irfft(uh, grid.nx)
     v = irfft(vh, grid.nx)
+    ψ = irfft(ψh, grid.nx)
+    ζ = irfft(ζh, grid.nx)
 
-    return u, v, ψ
+    return u, v, ψ, ζ
 end
 
 end # module TurbulentWords
