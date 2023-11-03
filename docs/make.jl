@@ -1,9 +1,9 @@
-using Documenter, DocumenterCitations, Literate
+using Documenter, Literate
 
 using CairoMakie
 # CairoMakie.activate!(type = "svg")
 
-using GeophysicalFlows
+using TurbulentWords
 
 #####
 ##### Generate literated examples
