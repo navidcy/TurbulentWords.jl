@@ -1,6 +1,10 @@
+# # A stratified turbulence example
+
 using Oceananigans
 using TurbulentWords
 using CairoMakie
+
+# We construct a simulation with a word and run it.
 
 simulation = word_to_simulation("hello", dynamics=:buoyancy_driven, pad_to_square=true)
 simulation.stop_time = 0.1
@@ -8,17 +12,21 @@ simulation.stop_time = 0.1
 model = simulation.model
 b = model.tracers
 outputs = (; b)
-filename = "hello_buoyancy.jld2"
+filename = "hello_buoyancy"
 simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
                                                       schedule = TimeInterval(0.01),
-                                                      filename = filename,
+                                                      filename = filename * ".jld2",
                                                       overwrite_existing = true)
 
 
 run!(simulation)
 
-bt = FieldTimeSeries(filename, "b")
+# Now we load the saved output
+
+bt = FieldTimeSeries(filename * ".jld2", "b")
 times = bt.times
+
+# and make a movie
 
 fig = Figure(resolution = (600, 600))
 ax = Axis(fig[1, 1])
@@ -35,7 +43,7 @@ stillframes = 20
 framerate = 60
 movingframes = length(times)
 
-record(fig, filename * ".gif", framerate=60) do io
+record(fig, filename * ".mp4", framerate=60) do io
     [recordframe!(io) for _ = 1:stillframes]
 
     for nn in 1:movingframes
@@ -50,3 +58,5 @@ record(fig, filename * ".gif", framerate=60) do io
 
     [recordframe!(io) for _ = 1:stillframes]
 end
+
+# ![](hello_buoyancy.mp4)
