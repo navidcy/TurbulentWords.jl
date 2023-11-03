@@ -14,6 +14,7 @@ const OUTPUT_DIR   = joinpath(@__DIR__, "src/literated")
 
 examples = [
   "hello_flow.jl",
+  "hello_turbulence.jl",
 ]
 
 for example in examples
@@ -26,6 +27,7 @@ end
 
 example_pages = [
     "Hello flow" => "literated/hello_flow.md",
+    "Two-dimensional turbulence" => "hello_turbulence.jl",
 ]
 
 appendix_pages = [
