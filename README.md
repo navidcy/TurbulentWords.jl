@@ -6,6 +6,19 @@ Make turbulence from words.
 
 The above animation was created with [`examples/two_dimensional_turbulence.jl`](https://github.com/navidcy/TurbulentWords.jl/blob/main/examples/two_dimensional_turbulence.jl).
 
+
+## Installation
+
+To install, from a Julia REPL:
+
+```julia
+julia> ]
+
+pkg> add https://github.com/navidcy/TurbulentWords.jl.git
+
+pkg> instantiate
+```
+
 ## Usage
 
 A simple word:
