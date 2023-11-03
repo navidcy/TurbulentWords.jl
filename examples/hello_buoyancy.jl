@@ -7,7 +7,7 @@ using CairoMakie
 # We construct a simulation with a word and run it.
 
 simulation = word_to_simulation("hello", dynamics=:buoyancy_driven, pad_to_square=true)
-simulation.stop_time = 0.1
+simulation.stop_time = 0.2
 
 model = simulation.model
 b = model.tracers
