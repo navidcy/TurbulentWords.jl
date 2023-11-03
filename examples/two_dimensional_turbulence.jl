@@ -27,8 +27,8 @@ model = NonhydrostaticModel(; grid,
 u, v, w = model.velocities
 
 # set the velocities from the word-velocities
-interior(u)[1:Nx, 1:Ny, 1] .= arch_array(arch, uᵢ)
-interior(v)[1:Nx, 1:Ny, 1] .= arch_array(arch, vᵢ)
+interior(u, 1:Nx, 1:Ny, 1) .= arch_array(arch, uᵢ)
+interior(v, 1:Nx, 1:Ny, 1) .= arch_array(arch, vᵢ)
 
 simulation = Simulation(model, Δt=0.05, stop_time=10)
 
