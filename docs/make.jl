@@ -54,8 +54,8 @@ format = Documenter.HTML(
 
 makedocs(
       authors = "Navid C. Constantinou and Gregory L. Wagner",
-     sitename = "GeophysicalFlows.jl",
-      modules = [GeophysicalFlows],
+     sitename = "TurbulentWords.jl",
+      modules = [TurbulentWords],
        format = format,
       doctest = true,
         clean = true,
