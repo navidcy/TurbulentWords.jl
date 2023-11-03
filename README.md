@@ -1,6 +1,6 @@
 # TurbulentWords.jl
 
-Create words for fluid simulations.
+Create initial conditions from words for fluid simulations.
 
 ```julia
 using TurbulentWords
