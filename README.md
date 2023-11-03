@@ -4,7 +4,11 @@ Make turbulence from words.
 
 ![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/b9efefc0-73c1-4206-9144-4c25af9ce25f)
 
-Simple example:
+The above animation was created with [`examples/two_dimensional_turbulence.jl`](https://github.com/navidcy/TurbulentWords.jl/blob/main/examples/two_dimensional_turbulence.jl).
+
+## Usage
+
+A simple word:
 
 ```julia
 using TurbulentWords
@@ -18,7 +22,7 @@ fig
 
 ![demo](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/d9c0696a-61a1-44d6-a5bc-00e99a59ed9b)
 
-We can also create a two-dimensional incompressible flow from a word:
+We can also create a two-dimensional incompressible flow from a word and use it to initialize a fluid simulation.
 
 ```julia
 using TurbulentWords
