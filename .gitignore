@@ -29,3 +29,5 @@ docs/site/
 *.gif
 *.mp4
 *.swp
+
+*.DS_Store
