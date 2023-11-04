@@ -9,7 +9,7 @@
     </a>
 </p>
 
-*Make turbulence from words.*
+*Make turbulence with words.*
 
 ![demo-clima](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/b9efefc0-73c1-4206-9144-4c25af9ce25f)
 
