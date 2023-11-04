@@ -28,7 +28,7 @@ end
 
 example_pages = [
     "Hello flow" => "literated/hello_flow.md",
-    "Two-dimensional turbulence" => "literated/hello_flow.md",
+    "Two-dimensional turbulence" => "literated/hello_turbulence.md",
     "Stratified turbulence" => "literated/hello_buoyancy.md",
 ]
 
