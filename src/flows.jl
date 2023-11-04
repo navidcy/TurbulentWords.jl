@@ -12,19 +12,23 @@ function word_to_flow(word::AbstractArray;
                       extent = (1, 1),
                       halo = (5, 5),
                       topology = (Periodic, Periodic, Flat),
+                      planner_flag = FFTW.MEASURE,
                       kw...)
 
     # Create the word grid
     Nx, Ny = size(word)
     grid = RectilinearGrid(architecture, size=(Nx, Ny); extent, halo, topology)
 
-    solver = FFTBasedPoissonSolver(grid)
+    # Planning with Oceananigans' default FFTW.PATIENT is very slow for weird
+    # word grids, so we use FFTW.MEASURE
+    solver = FFTBasedPoissonSolver(grid, planner_flag)
 
     ψ = CenterField(grid)
     ζ = solver.storage .= word
 
-    # solve for streamfunction ψ
+    # solve for streamfunction
     solve!(ψ, solver, ζ)
+    fill_halo_regions!(ψ)
 
     # Interpolate to ffc
     ψᶠᶠᶜ = @at (Face, Face, Center) identity(ψ)

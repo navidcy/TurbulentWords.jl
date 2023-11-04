@@ -1,6 +1,10 @@
+# # A two-dimensional turbulence example
+
 using Oceananigans
 using TurbulentWords
 using CairoMakie
+
+# We construct a simulation with a word and run it.
 
 simulation = word_to_simulation("hello", pad_to_square=true)
 simulation.stop_time = 10
@@ -16,8 +20,12 @@ simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
 
 run!(simulation)
 
+# Now we load the saved output
+
 ζt = FieldTimeSeries(filename * ".jld2", "ζ")
 times = ζt.times
+
+# and make a movie
 
 fig = Figure(resolution = (600, 600))
 ax = Axis(fig[1, 1])
@@ -35,7 +43,7 @@ stillframes = 20
 framerate = 60
 movingframes = length(times)
 
-record(fig, filename * ".gif", framerate=60) do io
+record(fig, filename * ".mp4", framerate=32) do io
     [recordframe!(io) for _ = 1:stillframes]
 
     for nn in 1:movingframes
@@ -50,3 +58,5 @@ record(fig, filename * ".gif", framerate=60) do io
 
     [recordframe!(io) for _ = 1:stillframes]
 end
+
+# ![](hello_turbulence.mp4)
