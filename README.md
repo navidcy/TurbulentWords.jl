@@ -1,7 +1,7 @@
 # TurbulentWords.jl
 
 <p align="left">
-    <a href="https://navidcy.github.io/TurbulentWords/dev">
+    <a href="https://navidcy.github.io/TurbulentWords.jl/dev">
         <img alt="latest docs" src="https://img.shields.io/badge/documentation-in%20development-orange">
     </a>
     <a href="https://github.com/SciML/ColPrac">
