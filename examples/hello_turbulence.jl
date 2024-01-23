@@ -40,10 +40,10 @@ n = Observable(1)
 heatmap!(ax, ζₙ; colormap = :balance, colorrange = (-ζmax, ζmax))
 
 stillframes = 20
-framerate = 60
+framerate = 32
 movingframes = length(times)
 
-record(fig, filename * ".mp4", framerate=32) do io
+record(fig, filename * ".mp4"; framerate) do io
     [recordframe!(io) for _ = 1:stillframes]
 
     for nn in 1:movingframes
