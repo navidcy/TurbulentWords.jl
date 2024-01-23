@@ -91,13 +91,12 @@ function word_to_array(word;
             return word_array
         elseif Nx > Ny
             square_word_array = zeros(Nx, Nx)
-            square_word_array[:, Nx÷2:Nx÷2+Ny-1] .= word_array
+            square_word_array[:, Nx÷2-Ny÷2:Nx÷2+Ny-1-Ny÷2] .= word_array
             return square_word_array
         elseif Ny > Nx
             square_word_array = zeros(Ny, Ny)
-            square_word_array[Ny÷2:Nx÷2+Nx-1, :] .= word_array
+            square_word_array[Ny÷2-Nx÷2:Nx÷2+Nx-1-Nx÷2, :] .= word_array
             return square_word_array
         end
     end
 end
-
