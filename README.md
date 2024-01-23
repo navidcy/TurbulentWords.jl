@@ -33,7 +33,7 @@ pkg> instantiate
 using TurbulentWords
 using CairoMakie
 
-fig = Figure(resolution=(2400, 300))
+fig = Figure(size=(2400, 300))
 ax = Axis(fig[1, 1])
 word = word_to_array("TUMULTUOUS")
 heatmap!(ax, word)
@@ -51,7 +51,7 @@ using CairoMakie
 
 u, v, ψ, ζ = word_to_flow("TEMPESTUOUS", vpad=50)
 
-fig = Figure(resolution = (1200, 1200))
+fig = Figure(size = (1200, 1200))
 
 ax1 = Axis(fig[1, 1], title="Vorticity")
 ax2 = Axis(fig[2, 1], title="Streamfunction")
@@ -130,4 +130,3 @@ fig
 ```
 
 ![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/741739a4-2e39-4f2e-8cbf-0807d5d01faa)
-

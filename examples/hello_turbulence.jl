@@ -27,7 +27,7 @@ times = ζt.times
 
 # and make a movie
 
-fig = Figure(resolution = (600, 600))
+fig = Figure(size = (600, 600))
 ax = Axis(fig[1, 1])
 hidedecorations!(ax)
 hidespines!(ax)

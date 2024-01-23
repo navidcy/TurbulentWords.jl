@@ -15,7 +15,7 @@ function word_to_movie(word, filename; kw...)
     ζt = FieldTimeSeries(filename * ".jld2", "ζ")
     times = ζt.times
 
-    fig = Figure(resolution = (600, 600))
+    fig = Figure(size = (600, 600))
     ax = Axis(fig[1, 1])
     hidedecorations!(ax)
     hidespines!(ax)
