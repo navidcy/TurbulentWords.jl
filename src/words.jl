@@ -48,6 +48,7 @@ end
 alternating(N) = [2isodd(n) - 1 for n = 1:N]
 
 function word_to_array(word;
+                       greek = false,
                        multiplicative_factors = ones(length(word)),
                        word_Ny = size(letter_to_array(word[1]), 2),
                        letter_pad::Int = 20,
@@ -58,7 +59,11 @@ function word_to_array(word;
     Nletters = length(word)
 
     word_tuple = ntuple(Nletters) do n
-        letter = word[n]
+        if greek
+            letter = word[2n-1]
+        else
+            letter = word[n]
+        end
         factor = multiplicative_factors[n]
         factor .* letter_to_array(letter, word_Ny, hpad=letter_pad)
     end
@@ -67,7 +72,7 @@ function word_to_array(word;
     Ny = size(word_tuple[1], 2)
 
     # Write the word with horizontal padding
-    hpad = min(1, hpad)
+    hpad = max(1, hpad)
     side_margin = zeros(hpad, Ny)
     word_array = deepcopy(side_margin)
 

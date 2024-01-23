@@ -6,11 +6,13 @@ function word_to_simulation(word;
 end
 
 function word_to_simulation(::Val{:two_dimensional_turbulence}, word;
+                            greek = false,
                             pad_to_square = true,
                             advection = WENO(order=9),
                             other_kw...)
 
-    uᵢ, vᵢ, ψᵢ, ζᵢ = word_to_flow(word; pad_to_square, other_kw...)
+    @show other_kw   
+    uᵢ, vᵢ, ψᵢ, ζᵢ = word_to_flow(word; greek, pad_to_square, other_kw...)
 
     grid = uᵢ.grid
     pressure_solver = FFTBasedPoissonSolver(grid, FFTW.MEASURE)
@@ -25,6 +27,7 @@ function word_to_simulation(::Val{:two_dimensional_turbulence}, word;
 end
 
 function word_to_simulation(::Val{:buoyancy_driven}, word;
+                            greek = false,
                             pad_to_square = true,
                             advection = WENO(order=5),
                             architecture = CPU(),
@@ -33,6 +36,7 @@ function word_to_simulation(::Val{:buoyancy_driven}, word;
                             other_kw...)
 
     bᵢ = word_to_array(word;
+                       greek,
                        pad_to_square,
                        multiplicative_factors = alternating(length(word)),
                        other_kw...)
