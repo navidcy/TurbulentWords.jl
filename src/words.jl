@@ -16,7 +16,7 @@ end
 function find_biggest_size()
     Nx, Ny = 0, 0
 
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω"
 
     for letter in alphabet
         letter_array = bitmap_to_array(letter)
