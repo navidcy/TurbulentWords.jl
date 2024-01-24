@@ -1,3 +1,5 @@
+using Oceananigans.Grids: on_architecture
+
 function word_to_simulation(word;
                             dynamics = :two_dimensional_turbulence,
                             other_kw...)
@@ -9,12 +11,14 @@ function word_to_simulation(::Val{:two_dimensional_turbulence}, word;
                             greek = false,
                             pad_to_square = true,
                             advection = WENO(order=9),
+                            architecture = CPU(),
                             other_kw...)
 
-    @show other_kw   
     uᵢ, vᵢ, ψᵢ, ζᵢ = word_to_flow(word; greek, pad_to_square, other_kw...)
 
     grid = uᵢ.grid
+    grid = on_architecture(architecture, grid)
+
     pressure_solver = FFTBasedPoissonSolver(grid, FFTW.MEASURE)
     model = NonhydrostaticModel(; grid, advection, pressure_solver,
                                 timestepper = :RungeKutta3)
