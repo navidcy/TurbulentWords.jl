@@ -1,5 +1,12 @@
 using Oceananigans.Grids: on_architecture
 
+"""
+    word_to_simulation(word;
+                       dynamics = :two_dimensional_turbulence,
+                       other_kw...)
+
+Return a simulations with `word` as initial condition.
+"""
 function word_to_simulation(word;
                             dynamics = :two_dimensional_turbulence,
                             other_kw...)

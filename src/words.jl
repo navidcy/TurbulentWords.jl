@@ -30,6 +30,11 @@ end
 
 biggest_Nx, biggest_Ny = find_biggest_size()
 
+"""
+    letter_to_array(letter, Ny=biggest_Ny; hpad=20)
+
+Convert `letter` to an array of ones and zeros.
+"""
 function letter_to_array(letter, Ny=biggest_Ny; hpad=20)
     letter_array = bitmap_to_array(letter)
 
@@ -45,8 +50,39 @@ function letter_to_array(letter, Ny=biggest_Ny; hpad=20)
     return bigger_array
 end
 
+"""
+    alternating(N)
+
+Return an array of alternating 1 and -1 of length `N`.
+
+Example
+
+```jldoctest
+julia> using TurbulentWords
+
+julia> alternating(5)
+5-element Vector{Int64}:
+  1
+ -1
+  1
+ -1
+  1
+```
+"""
 alternating(N) = [2isodd(n) - 1 for n = 1:N]
 
+"""
+    word_to_array(word;
+                  greek = false,
+                  multiplicative_factors = ones(length(word)),
+                  word_Ny = size(letter_to_array(word[1]), 2),
+                  letter_pad::Int = 20,
+                  vpad::Int = 0,
+                  pad_to_square::Bool = false,
+                  hpad::Int = 50)
+
+Convert `word` to an array of ones and zeros.
+"""
 function word_to_array(word;
                        greek = false,
                        multiplicative_factors = ones(length(word)),
