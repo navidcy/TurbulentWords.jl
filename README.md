@@ -20,7 +20,7 @@ To install from a Julia REPL:
 ```julia
 julia> ]
 
-pkg> add https://github.com/navidcy/TurbulentWords.jl.git
+pkg> add TurbulentWords
 
 pkg> instantiate
 ```
@@ -35,7 +35,7 @@ using CairoMakie
 
 fig = Figure(size=(2400, 300))
 ax = Axis(fig[1, 1])
-word = word_to_array("TUMULTUOUS")
+word = word_to_array("Ναταλια")
 heatmap!(ax, word)
 fig
 ```
