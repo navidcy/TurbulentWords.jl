@@ -49,9 +49,10 @@ pages = [
 #####
 
 format = Documenter.HTML(
-  collapselevel = 2,
-     prettyurls = get(ENV, "CI", nothing) == "true",
-      canonical = "https://navidcy.github.io/TurbulentWords.jl/dev/"
+    collapselevel = 2,
+        prettyurls = get(ENV, "CI", nothing) == "true",
+    size_threshold = 2^20,
+         canonical = "https://navidcy.github.io/TurbulentWords.jl/dev/"
 )
 
 makedocs(
