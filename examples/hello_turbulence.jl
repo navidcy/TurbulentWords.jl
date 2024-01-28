@@ -7,14 +7,14 @@ using CairoMakie
 # We construct a simulation with a word and run it.
 
 simulation = word_to_simulation("hello", pad_to_square=true)
-simulation.stop_time = 10
+simulation.stop_time = 15
 
 model = simulation.model
 u, v, w = model.velocities
 outputs = (; ζ = ∂x(v) - ∂y(u))
 filename = "hello_turbulence"
 simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
-                                                      schedule = TimeInterval(0.1),
+                                                      schedule = TimeInterval(0.2),
                                                       filename = filename * ".jld2",
                                                       overwrite_existing = true)
 

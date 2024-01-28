@@ -32,6 +32,8 @@ pkg> add TurbulentWords
 pkg> instantiate
 ```
 
+TurbulentWords.jl requires Julia v1.6 or later but we encourage using Julia v1.10.
+
 ## Usage
 
 ### A turbulent word
