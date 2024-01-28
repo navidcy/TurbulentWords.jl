@@ -1,8 +1,4 @@
-using Documenter, Literate
-
-using CairoMakie
-CairoMakie.activate!(type = "svg")
-
+using Documenter, Literate, CairoMakie
 using TurbulentWords
 
 #####
