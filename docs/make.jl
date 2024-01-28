@@ -52,7 +52,7 @@ format = Documenter.HTML(
     collapselevel = 2,
         prettyurls = get(ENV, "CI", nothing) == "true",
     size_threshold = 2^20,
-         canonical = "https://navidcy.github.io/TurbulentWords.jl/dev/"
+         canonical = "https://navidcy.github.io/TurbulentWords.jl/stable/"
 )
 
 makedocs(
@@ -90,7 +90,7 @@ end
 
 deploydocs(       repo = "github.com/navidcy/TurbulentWords.jl.git",
               versions = ["stable" => "v^", "dev" => "dev", "v#.#.#"],
-          push_preview = false,
-              forcepush = true,
-              devbranch = "main"
+          push_preview = true,
+             forcepush = true,
+             devbranch = "main"
           )
