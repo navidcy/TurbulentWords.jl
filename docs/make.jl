@@ -13,9 +13,9 @@ const EXAMPLES_DIR = joinpath(@__DIR__, "..", "examples")
 const OUTPUT_DIR   = joinpath(@__DIR__, "src/literated")
 
 examples = [
-  "hello_flow.jl",
-  "hello_turbulence.jl",
-  "hello_buoyancy.jl",
+    "hello_flow.jl",
+    "hello_turbulence.jl",
+    "hello_buoyancy.jl",
 ]
 
 for example in examples
