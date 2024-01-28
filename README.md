@@ -7,6 +7,10 @@
     <a href="https://navidcy.github.io/TurbulentWords.jl/dev">
         <img alt="latest docs" src="https://img.shields.io/badge/documentation-in%20development-orange">
     </a>
+
+   <a href="https://github.com/navidcy/TurbulentWords.jl/releases">
+      <img alt="GitHub tag (latest SemVer pre-release)" src="https://img.shields.io/github/v/tag/navidcy/TurbulentWords.jl?include_prereleases&label=latest%20version&logo=github&sort=semver&style=flat-square">
+   </a>
     <a href="https://github.com/SciML/ColPrac">
       <img alt="ColPrac: Contributor's Guide on Collaborative Practices for Community Packages" src="https://img.shields.io/badge/ColPrac-Contributor's%20Guide-blueviolet">
     </a>
