@@ -60,16 +60,16 @@ using CairoMakie
 
 u, v, ψ, ζ = word_to_flow("TEMPESTUOUS", vpad=50)
 
-fig = Figure(size = (1200, 1200))
+fig = Figure(size = (800, 800))
 
-ax1 = Axis(fig[1, 1], title="Vorticity")
-ax2 = Axis(fig[2, 1], title="Streamfunction")
-ax3 = Axis(fig[3, 1], title="u")
-ax4 = Axis(fig[4, 1], title="v")
+ax1 = Axis(fig[1, 1], title="Vorticity, ∂v/∂x - ∂u/∂y")
+ax2 = Axis(fig[2, 1], title="Streamfunction, ψ")
+ax3 = Axis(fig[3, 1], title="u = - ∂ψ/∂y")
+ax4 = Axis(fig[4, 1], title="v = + ∂ψ/∂x")
 
 [hidedecorations!(ax) for ax in (ax1, ax2, ax3, ax4)]
 
-heatmap!(ax1, interior(ζ, :, :, 1), colormap=:balance)
+heatmap!(ax1, interior(ζ, :, :, 1), colormap=:balance, colorrange = (-1.2, 1.2))
 heatmap!(ax2, interior(ψ, :, :, 1), colormap=:speed)
 heatmap!(ax3, interior(u, :, :, 1), colormap=:balance)
 heatmap!(ax4, interior(v, :, :, 1), colormap=:balance)
@@ -77,7 +77,7 @@ heatmap!(ax4, interior(v, :, :, 1), colormap=:balance)
 fig
 ```
 
-![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/b20817ba-d8de-4b9a-95f1-666dd89d6181)
+![image](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/c1602b42-46cb-4c85-b972-52319b31f7a8)
 
 ### A turbulent simulation
 
