@@ -44,7 +44,7 @@ using CairoMakie
 
 fig = Figure(size=(2400, 300))
 ax = Axis(fig[1, 1])
-word = word_to_array("Ναταλια")
+word = word_to_array("TUMULTUOUS")
 heatmap!(ax, word)
 fig
 ```
