@@ -53,6 +53,8 @@ fig
 
 ### A turbulent flow
 
+We can compute the two-dimensional incompressible velocity field whose vorticity is a given word.
+
 ```julia
 using TurbulentWords
 using Oceananigans
