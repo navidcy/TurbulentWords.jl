@@ -6,8 +6,8 @@ using CairoMakie
 
 # We construct a simulation with a word and run it.
 
-simulation = word_to_simulation("LEAH", pad_to_square=true)
-simulation.stop_time = 40
+simulation = word_to_simulation("hello", pad_to_square=true)
+simulation.stop_time = 10
 
 model = simulation.model
 u, v, w = model.velocities
