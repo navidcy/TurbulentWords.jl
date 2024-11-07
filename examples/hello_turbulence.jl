@@ -6,8 +6,8 @@ using CairoMakie
 
 # We construct a simulation with a word and run it.
 
-simulation = word_to_simulation("hello", pad_to_square=true)
-simulation.stop_time = 10
+simulation = word_to_simulation("LEAH", pad_to_square=true)
+simulation.stop_time = 40
 
 model = simulation.model
 u, v, w = model.velocities
@@ -34,10 +34,10 @@ hidespines!(ax)
 
 n = Observable(1)
 
-ζₙ = @lift interior(ζt[$n], :, :, 1)
+ζn = @lift ζt[$n]
 
-ζmax = 0.8
-heatmap!(ax, ζₙ; colormap = :balance, colorrange = (-ζmax, ζmax))
+ζlim = 0.8
+heatmap!(ax, ζn; colormap = :balance, colorrange = (-ζlim, ζlim))
 
 stillframes = 20
 framerate = 60
