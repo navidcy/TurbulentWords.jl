@@ -34,10 +34,10 @@ hidedecorations!(ax)
 hidespines!(ax)
 n = Observable(1)
 
-bₙ = @lift interior(bt[$n], :, 1, :)
+bn = @lift bt[$n]
 
-bmax = 0.8
-heatmap!(ax, bₙ; colormap = :balance, colorrange = (-bmax, bmax))
+blim = 0.8
+heatmap!(ax, bn; colormap = :balance, colorrange = (-blim, blim))
 
 stillframes = 20
 framerate = 60
