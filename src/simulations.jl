@@ -7,7 +7,7 @@ end
 
 function word_to_simulation(::Val{:two_dimensional_turbulence}, word;
                             pad_to_square = true,
-                            advection = WENO(order=9),
+                            advection = WENO(order=5),
                             other_kw...)
 
     uᵢ, vᵢ, ψᵢ, ζᵢ = word_to_flow(word; pad_to_square, other_kw...)
@@ -55,8 +55,7 @@ function word_to_simulation(::Val{:buoyancy_driven}, word;
 end
 
 function add_wizard_and_progress!(simulation)
-    wizard = TimeStepWizard(cfl=0.8, max_change=1.1)
-    simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(5))
+    conjure_time_step_wizard!(simulation, cfl=0.7, IterationInterval(5))
 
     wall_clock = Ref(time_ns())
 
@@ -74,3 +73,4 @@ function add_wizard_and_progress!(simulation)
 
     return nothing
 end
+
