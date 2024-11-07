@@ -14,8 +14,7 @@ function word_to_simulation(::Val{:two_dimensional_turbulence}, word;
 
     grid = uᵢ.grid
     pressure_solver = FFTBasedPoissonSolver(grid, FFTW.MEASURE)
-    model = NonhydrostaticModel(; grid, advection, pressure_solver,
-                                timestepper = :RungeKutta3)
+    model = NonhydrostaticModel(; grid, advection, pressure_solver)
     set!(model, u=uᵢ, v=vᵢ)
 
     simulation = Simulation(model, Δt=0.01, stop_time=1)
@@ -44,8 +43,7 @@ function word_to_simulation(::Val{:buoyancy_driven}, word;
     pressure_solver = FFTBasedPoissonSolver(grid, FFTW.MEASURE)
     model = NonhydrostaticModel(; grid, advection, pressure_solver,
                                 tracers = :b,
-                                buoyancy = BuoyancyTracer(),
-                                timestepper = :RungeKutta3)
+                                buoyancy = BuoyancyTracer())
 
     bᵢ = reshape(bᵢ, Nx, 1, Nz) # assumes that y-topology is Flat
     set!(model, b=bᵢ)
