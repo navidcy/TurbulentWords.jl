@@ -1,7 +1,7 @@
 name = "TurbulentWords"
 uuid = "61083c21-b130-4e74-9cd1-836f8dfec7b9"
 authors = ["Navid C. Constantinou <navidcy@users.noreply.github.com> and Gregory L. Wagner <glwagner@users.noreply.github.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
@@ -9,6 +9,6 @@ FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
 Oceananigans = "9e8cae18-63c1-5223-a75c-80ca9d6e9a09"
 
 [compat]
-CairoMakie = "0.10"
 FFTW = "1"
-Oceananigans = "0.90"
+CairoMakie = "0.12"
+Oceananigans = "0.92"
