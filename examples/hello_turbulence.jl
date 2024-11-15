@@ -34,10 +34,10 @@ hidespines!(ax)
 
 n = Observable(1)
 
-ζₙ = @lift interior(ζt[$n], :, :, 1)
+ζn = @lift ζt[$n]
 
-ζmax = 0.8
-heatmap!(ax, ζₙ; colormap = :balance, colorrange = (-ζmax, ζmax))
+ζlim = 0.8
+heatmap!(ax, ζn; colormap = :balance, colorrange = (-ζlim, ζlim))
 
 stillframes = 20
 framerate = 32

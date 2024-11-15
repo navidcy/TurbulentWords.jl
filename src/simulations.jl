@@ -17,7 +17,7 @@ end
 function word_to_simulation(::Val{:two_dimensional_turbulence}, word;
                             greek = false,
                             pad_to_square = true,
-                            advection = WENO(order=9),
+                            advection = WENO(order=5),
                             architecture = CPU(),
                             other_kw...)
 
@@ -27,8 +27,7 @@ function word_to_simulation(::Val{:two_dimensional_turbulence}, word;
     grid = on_architecture(architecture, grid)
 
     pressure_solver = FFTBasedPoissonSolver(grid, FFTW.MEASURE)
-    model = NonhydrostaticModel(; grid, advection, pressure_solver,
-                                timestepper = :RungeKutta3)
+    model = NonhydrostaticModel(; grid, advection, pressure_solver)
     set!(model, u=uᵢ, v=vᵢ)
 
     simulation = Simulation(model, Δt=0.01, stop_time=1)
@@ -59,8 +58,7 @@ function word_to_simulation(::Val{:buoyancy_driven}, word;
     pressure_solver = FFTBasedPoissonSolver(grid, FFTW.MEASURE)
     model = NonhydrostaticModel(; grid, advection, pressure_solver,
                                 tracers = :b,
-                                buoyancy = BuoyancyTracer(),
-                                timestepper = :RungeKutta3)
+                                buoyancy = BuoyancyTracer())
 
     bᵢ = reshape(bᵢ, Nx, 1, Nz) # assumes that y-topology is Flat
     set!(model, b=bᵢ)
@@ -72,8 +70,7 @@ function word_to_simulation(::Val{:buoyancy_driven}, word;
 end
 
 function add_wizard_and_progress!(simulation)
-    wizard = TimeStepWizard(cfl=0.8, max_change=1.1)
-    simulation.callbacks[:wizard] = Callback(wizard, IterationInterval(5))
+    conjure_time_step_wizard!(simulation, cfl=0.7, IterationInterval(5))
 
     wall_clock = Ref(time_ns())
 

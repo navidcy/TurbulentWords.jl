@@ -22,9 +22,9 @@ fig
 u, v, ψ, ζ = word_to_flow(hi)
 
 ulim = 0.05
-fig = Figure(size=(800, 400))
-axu = Axis(fig[1, 1], aspect=1, title="zonal velocity u")
-axv = Axis(fig[1, 2], aspect=1, title="meridional velocity v")
-heatmap!(axu, interior(u, :, :, 1), colorrange=(-ulim, ulim), colormap=:balance)
-heatmap!(axv, interior(v, :, :, 1), colorrange=(-ulim, ulim), colormap=:balance)
+fig = Figure(resolution=(800, 400))
+axu = Axis(fig[1, 1], aspect=1, title="Zonal velocity u")
+axv = Axis(fig[1, 2], aspect=1, title="Meridional velocity v")
+heatmap!(axu, u, colorrange=(-ulim, ulim), colormap=:balance)
+heatmap!(axv, v, colorrange=(-ulim, ulim), colormap=:balance)
 fig
