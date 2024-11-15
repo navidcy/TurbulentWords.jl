@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Two-dimensional turbulence · TurbulentWords.jl</title><meta name="title" content="Two-dimensional turbulence · TurbulentWords.jl"/><meta property="og:title" content="Two-dimensional turbulence · TurbulentWords.jl"/><meta property="twitter:title" content="Two-dimensional turbulence · TurbulentWords.jl"/><meta name="description" content="Documentation for TurbulentWords.jl."/><meta property="og:description" content="Documentation for TurbulentWords.jl."/><meta property="twitter:description" content="Documentation for TurbulentWords.jl."/><meta property="og:url" content="https://navidcy.github.io/TurbulentWords.jl/stable/literated/hello_turbulence/"/><meta property="twitter:url" content="https://navidcy.github.io/TurbulentWords.jl/stable/literated/hello_turbulence/"/><link rel="canonical" href="https://navidcy.github.io/TurbulentWords.jl/stable/literated/hello_turbulence/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">TurbulentWords.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../hello_flow/">Hello flow</a></li><li class="is-active"><a class="tocitem" href>Two-dimensional turbulence</a></li><li><a class="tocitem" href="../hello_buoyancy/">Stratified turbulence</a></li></ul></li><li><span class="tocitem">Appendix</span><ul><li><a class="tocitem" href="../../appendix/library/">Library</a></li><li><a class="tocitem" href="../../appendix/function_index/">Function index</a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Two-dimensional turbulence</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Two-dimensional turbulence</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/navidcy/TurbulentWords.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/navidcy/TurbulentWords.jl/blob/main/examples/hello_turbulence.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="A-two-dimensional-turbulence-example"><a class="docs-heading-anchor" href="#A-two-dimensional-turbulence-example">A two-dimensional turbulence example</a><a id="A-two-dimensional-turbulence-example-1"></a><a class="docs-heading-anchor-permalink" href="#A-two-dimensional-turbulence-example" title="Permalink"></a></h1><pre><code class="language-julia hljs">using Oceananigans
+using TurbulentWords
+using CairoMakie</code></pre><p>We construct a simulation with a word and run it.</p><pre><code class="language-julia hljs">simulation = word_to_simulation(&quot;hello&quot;, pad_to_square=true)
+simulation.stop_time = 15
+
+model = simulation.model
+u, v, w = model.velocities
+outputs = (; ζ = ∂x(v) - ∂y(u))
+filename = &quot;hello_turbulence&quot;
+simulation.output_writers[:fields] = JLD2OutputWriter(model, outputs,
+                                                      schedule = TimeInterval(0.2),
+                                                      filename = filename * &quot;.jld2&quot;,
+                                                      overwrite_existing = true)
+
+run!(simulation)</code></pre><pre><code class="nohighlight hljs">[ Info: Initializing simulation...
+[ Info: Iteration: 0, time: 0.0, wall time: 13.546 seconds, Δt: 0.011000000000000001
+[ Info:     ... simulation initialization complete (7.563 seconds)
+[ Info: Executing initial time step...
+[ Info:     ... initial time step complete (3.585 seconds).
+[ Info: Iteration: 10, time: 0.11549999999999999, wall time: 9.196 seconds, Δt: 0.013310000000000002
+[ Info: Iteration: 20, time: 0.24392300000000006, wall time: 3.706 seconds, Δt: 0.016105100000000004
+[ Info: Iteration: 30, time: 0.4, wall time: 3.693 seconds, Δt: 0.019487171000000008
+[ Info: Iteration: 40, time: 0.6000000000000001, wall time: 3.693 seconds, Δt: 0.023579476910000015
+[ Info: Iteration: 50, time: 0.8259374246010001, wall time: 3.714 seconds, Δt: 0.02853116706110002
+[ Info: Iteration: 60, time: 1.09415285130163, wall time: 3.704 seconds, Δt: 0.03452271214393103
+[ Info: Iteration: 70, time: 1.4000000000000001, wall time: 3.691 seconds, Δt: 0.03993508492884428
+[ Info: Iteration: 80, time: 1.760735317680783, wall time: 3.702 seconds, Δt: 0.040223444253647184
+[ Info: Iteration: 90, time: 2.1614562291719874, wall time: 3.691 seconds, Δt: 0.04049595477912628
+[ Info: Iteration: 100, time: 2.562547029155276, wall time: 3.726 seconds, Δt: 0.04053230081614868
+[ Info: Iteration: 110, time: 2.962004472917895, wall time: 3.702 seconds, Δt: 0.04050917929407652
+[ Info: Iteration: 120, time: 3.3620714855379097, wall time: 3.715 seconds, Δt: 0.04053770520736682
+[ Info: Iteration: 130, time: 3.7623802636337986, wall time: 3.698 seconds, Δt: 0.04069133622588583
+[ Info: Iteration: 140, time: 4.163289617110657, wall time: 3.712 seconds, Δt: 0.040980890816749306
+[ Info: Iteration: 150, time: 4.564636335129785, wall time: 3.697 seconds, Δt: 0.04136751976972164
+[ Info: Iteration: 160, time: 4.966467986647121, wall time: 3.709 seconds, Δt: 0.04189291249315152
+[ Info: Iteration: 170, time: 5.368692894925354, wall time: 3.710 seconds, Δt: 0.04245380027359523
+[ Info: Iteration: 180, time: 5.7709632618821685, wall time: 3.700 seconds, Δt: 0.04303724835066994
+[ Info: Iteration: 190, time: 6.173397560793614, wall time: 3.699 seconds, Δt: 0.04368848139079767
+[ Info: Iteration: 200, time: 6.575943063123882, wall time: 3.711 seconds, Δt: 0.04422343000683621
+[ Info: Iteration: 210, time: 6.977220956404089, wall time: 3.713 seconds, Δt: 0.044316291168065215
+[ Info: Iteration: 220, time: 7.333127771050471, wall time: 3.699 seconds, Δt: 0.04456510715639063
+[ Info: Iteration: 230, time: 7.733997386011749, wall time: 3.723 seconds, Δt: 0.0447610176785131
+[ Info: Iteration: 240, time: 8.134492531049853, wall time: 3.704 seconds, Δt: 0.04480497304379494
+[ Info: Iteration: 250, time: 8.534358339040104, wall time: 3.694 seconds, Δt: 0.04468819412394342
+[ Info: Iteration: 260, time: 8.934068021565222, wall time: 3.713 seconds, Δt: 0.04464691562846291
+[ Info: Iteration: 270, time: 9.333371687236944, wall time: 3.695 seconds, Δt: 0.04424498918474087
+[ Info: Iteration: 280, time: 9.732134267177395, wall time: 3.702 seconds, Δt: 0.043869477871105664
+[ Info: Iteration: 290, time: 10.131285421154162, wall time: 3.690 seconds, Δt: 0.04360905575916752
+[ Info: Iteration: 300, time: 10.53055074109758, wall time: 3.693 seconds, Δt: 0.04348348067408865
+[ Info: Iteration: 310, time: 10.928940444261722, wall time: 3.698 seconds, Δt: 0.042473842744075806
+[ Info: Iteration: 320, time: 11.325912892647944, wall time: 3.696 seconds, Δt: 0.04162148100074436
+[ Info: Iteration: 330, time: 11.723888007340996, wall time: 3.653 seconds, Δt: 0.04107445795138469
+[ Info: Iteration: 340, time: 12.122674515498437, wall time: 3.687 seconds, Δt: 0.04084621554495838
+[ Info: Iteration: 350, time: 12.481561183720311, wall time: 3.692 seconds, Δt: 0.040769599940770215
+[ Info: Iteration: 360, time: 12.88170061718457, wall time: 3.706 seconds, Δt: 0.04096542622268168
+[ Info: Iteration: 370, time: 13.282255299712842, wall time: 3.680 seconds, Δt: 0.041293587435679416
+[ Info: Iteration: 380, time: 13.682982190374382, wall time: 3.693 seconds, Δt: 0.04171048236160351
+[ Info: Iteration: 390, time: 14.083893988959208, wall time: 3.702 seconds, Δt: 0.04219666973691839
+[ Info: Iteration: 400, time: 14.442061472651286, wall time: 3.666 seconds, Δt: 0.04197196803412508
+[ Info: Iteration: 410, time: 14.841919024935265, wall time: 3.651 seconds, Δt: 0.04187418381880986
+[ Info: Simulation is stopping after running for 2.725 minutes.
+[ Info: Simulation time 15 seconds equals or exceeds stop time 15 seconds.
+</code></pre><p>Now we load the saved output</p><pre><code class="language-julia hljs">ζt = FieldTimeSeries(filename * &quot;.jld2&quot;, &quot;ζ&quot;)
+times = ζt.times</code></pre><pre><code class="nohighlight hljs">0.0:0.2:15.0</code></pre><p>and make a movie</p><pre><code class="language-julia hljs">fig = Figure(size = (600, 600))
+ax = Axis(fig[1, 1])
+hidedecorations!(ax)
+hidespines!(ax)
+
+n = Observable(1)
+
+ζn = @lift ζt[$n]
+
+ζlim = 0.8
+heatmap!(ax, ζn; colormap = :balance, colorrange = (-ζlim, ζlim))
+
+stillframes = 20
+framerate = 32
+movingframes = length(times)
+
+record(fig, filename * &quot;.mp4&quot;; framerate) do io
+    [recordframe!(io) for _ = 1:stillframes]
+
+    for nn in 1:movingframes
+        n[] = nn
+        recordframe!(io)
+    end
+
+    for nn in movingframes:-1:1
+        n[] = nn
+        recordframe!(io)
+    end
+
+    [recordframe!(io) for _ = 1:stillframes]
+end</code></pre><pre><code class="nohighlight hljs">&quot;hello_turbulence.mp4&quot;</code></pre><p><video src="../hello_turbulence.mp4" controls="true" title><a href="../hello_turbulence.mp4"></a></video></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../hello_flow/">« Hello flow</a><a class="docs-footer-nextpage" href="../hello_buoyancy/">Stratified turbulence »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.8.0 on <span class="colophon-date" title="Friday 15 November 2024 22:24">Friday 15 November 2024</span>. Using Julia version 1.10.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
