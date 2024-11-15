@@ -1,9 +1,16 @@
 # TurbulentWords.jl
 
 <p align="left">
+    <a href="https://navidcy.github.io/TurbulentWords.jl/stable">
+        <img alt="stable docs" src="https://img.shields.io/badge/documentation-in%20stable-blue">
+    </a>
     <a href="https://navidcy.github.io/TurbulentWords.jl/dev">
         <img alt="latest docs" src="https://img.shields.io/badge/documentation-in%20development-orange">
     </a>
+
+   <a href="https://github.com/navidcy/TurbulentWords.jl/releases">
+      <img alt="GitHub tag (latest SemVer pre-release)" src="https://img.shields.io/github/v/tag/navidcy/TurbulentWords.jl?include_prereleases&label=latest%20version&logo=github&sort=semver&style=flat-square">
+   </a>
     <a href="https://github.com/SciML/ColPrac">
       <img alt="ColPrac: Contributor's Guide on Collaborative Practices for Community Packages" src="https://img.shields.io/badge/ColPrac-Contributor's%20Guide-blueviolet">
     </a>
@@ -20,10 +27,12 @@ To install from a Julia REPL:
 ```julia
 julia> ]
 
-pkg> add https://github.com/navidcy/TurbulentWords.jl.git
+pkg> add TurbulentWords
 
 pkg> instantiate
 ```
+
+TurbulentWords.jl requires Julia v1.6 or later but we encourage using Julia v1.10.
 
 ## Usage
 
@@ -33,7 +42,7 @@ pkg> instantiate
 using TurbulentWords
 using CairoMakie
 
-fig = Figure(resolution=(2400, 300))
+fig = Figure(size=(2400, 300))
 ax = Axis(fig[1, 1])
 word = word_to_array("TUMULTUOUS")
 heatmap!(ax, word)
@@ -44,6 +53,8 @@ fig
 
 ### A turbulent flow
 
+We can compute the two-dimensional incompressible velocity field whose vorticity is a given word.
+
 ```julia
 using TurbulentWords
 using Oceananigans
@@ -51,16 +62,16 @@ using CairoMakie
 
 u, v, ψ, ζ = word_to_flow("TEMPESTUOUS", vpad=50)
 
-fig = Figure(resolution = (1200, 1200))
+fig = Figure(size = (800, 800))
 
-ax1 = Axis(fig[1, 1], title="Vorticity")
-ax2 = Axis(fig[2, 1], title="Streamfunction")
-ax3 = Axis(fig[3, 1], title="u")
-ax4 = Axis(fig[4, 1], title="v")
+ax1 = Axis(fig[1, 1], title="Vorticity, ∂v/∂x - ∂u/∂y")
+ax2 = Axis(fig[2, 1], title="Streamfunction, ψ")
+ax3 = Axis(fig[3, 1], title="u = - ∂ψ/∂y")
+ax4 = Axis(fig[4, 1], title="v = + ∂ψ/∂x")
 
 [hidedecorations!(ax) for ax in (ax1, ax2, ax3, ax4)]
 
-heatmap!(ax1, interior(ζ, :, :, 1), colormap=:balance)
+heatmap!(ax1, interior(ζ, :, :, 1), colormap=:balance, colorrange = (-1.2, 1.2))
 heatmap!(ax2, interior(ψ, :, :, 1), colormap=:speed)
 heatmap!(ax3, interior(u, :, :, 1), colormap=:balance)
 heatmap!(ax4, interior(v, :, :, 1), colormap=:balance)
@@ -68,7 +79,7 @@ heatmap!(ax4, interior(v, :, :, 1), colormap=:balance)
 fig
 ```
 
-![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/b20817ba-d8de-4b9a-95f1-666dd89d6181)
+![image](https://github.com/navidcy/TurbulentWords.jl/assets/7112768/c1602b42-46cb-4c85-b972-52319b31f7a8)
 
 ### A turbulent simulation
 
@@ -130,4 +141,3 @@ fig
 ```
 
 ![image](https://github.com/navidcy/TurbulentWords.jl/assets/15271942/741739a4-2e39-4f2e-8cbf-0807d5d01faa)
-

@@ -28,7 +28,7 @@ times = bt.times
 
 # and make a movie
 
-fig = Figure(resolution = (600, 600))
+fig = Figure(size = (600, 600))
 ax = Axis(fig[1, 1])
 hidedecorations!(ax)
 hidespines!(ax)
@@ -40,10 +40,10 @@ blim = 0.8
 heatmap!(ax, bn; colormap = :balance, colorrange = (-blim, blim))
 
 stillframes = 20
-framerate = 60
+framerate = 32
 movingframes = length(times)
 
-record(fig, filename * ".mp4", framerate=32) do io
+record(fig, filename * ".mp4"; framerate) do io
     [recordframe!(io) for _ = 1:stillframes]
 
     for nn in 1:movingframes

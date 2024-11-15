@@ -16,7 +16,7 @@ end
 function find_biggest_size()
     Nx, Ny = 0, 0
 
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψω"
 
     for letter in alphabet
         letter_array = bitmap_to_array(letter)
@@ -30,6 +30,11 @@ end
 
 biggest_Nx, biggest_Ny = find_biggest_size()
 
+"""
+    letter_to_array(letter, Ny=biggest_Ny; hpad=20)
+
+Convert `letter` to an array of ones and zeros.
+"""
 function letter_to_array(letter, Ny=biggest_Ny; hpad=20)
     letter_array = bitmap_to_array(letter)
 
@@ -45,9 +50,41 @@ function letter_to_array(letter, Ny=biggest_Ny; hpad=20)
     return bigger_array
 end
 
+"""
+    alternating(N)
+
+Return an array of alternating 1 and -1 of length `N`.
+
+Example
+
+```jldoctest
+julia> using TurbulentWords
+
+julia> alternating(5)
+5-element Vector{Int64}:
+  1
+ -1
+  1
+ -1
+  1
+```
+"""
 alternating(N) = [2isodd(n) - 1 for n = 1:N]
 
+"""
+    word_to_array(word;
+                  greek = false,
+                  multiplicative_factors = ones(length(word)),
+                  word_Ny = size(letter_to_array(word[1]), 2),
+                  letter_pad::Int = 20,
+                  vpad::Int = 0,
+                  pad_to_square::Bool = false,
+                  hpad::Int = 50)
+
+Convert `word` to an array of ones and zeros.
+"""
 function word_to_array(word;
+                       greek = false,
                        multiplicative_factors = ones(length(word)),
                        word_Ny = size(letter_to_array(word[1]), 2),
                        letter_pad::Int = 20,
@@ -58,7 +95,11 @@ function word_to_array(word;
     Nletters = length(word)
 
     word_tuple = ntuple(Nletters) do n
-        letter = word[n]
+        if greek
+            letter = word[2n-1]
+        else
+            letter = word[n]
+        end
         factor = multiplicative_factors[n]
         factor .* letter_to_array(letter, word_Ny, hpad=letter_pad)
     end
@@ -67,7 +108,7 @@ function word_to_array(word;
     Ny = size(word_tuple[1], 2)
 
     # Write the word with horizontal padding
-    hpad = min(1, hpad)
+    hpad = max(1, hpad)
     side_margin = zeros(hpad, Ny)
     word_array = deepcopy(side_margin)
 
@@ -91,13 +132,12 @@ function word_to_array(word;
             return word_array
         elseif Nx > Ny
             square_word_array = zeros(Nx, Nx)
-            square_word_array[:, Nx÷2:Nx÷2+Ny-1] .= word_array
+            square_word_array[:, Nx÷2-Ny÷2:Nx÷2+Ny-1-Ny÷2] .= word_array
             return square_word_array
         elseif Ny > Nx
             square_word_array = zeros(Ny, Ny)
-            square_word_array[Ny÷2:Nx÷2+Nx-1, :] .= word_array
+            square_word_array[Ny÷2-Nx÷2:Nx÷2+Nx-1-Nx÷2, :] .= word_array
             return square_word_array
         end
     end
 end
-

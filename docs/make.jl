@@ -1,8 +1,4 @@
-using Documenter, Literate
-
-using CairoMakie
-# CairoMakie.activate!(type = "svg")
-
+using Documenter, Literate, CairoMakie
 using TurbulentWords
 
 #####
@@ -13,9 +9,9 @@ const EXAMPLES_DIR = joinpath(@__DIR__, "..", "examples")
 const OUTPUT_DIR   = joinpath(@__DIR__, "src/literated")
 
 examples = [
-  "hello_flow.jl",
-  "hello_turbulence.jl",
-  "hello_buoyancy.jl",
+    "hello_flow.jl",
+    "hello_turbulence.jl",
+    "hello_buoyancy.jl",
 ]
 
 for example in examples
@@ -49,9 +45,10 @@ pages = [
 #####
 
 format = Documenter.HTML(
-  collapselevel = 2,
-     prettyurls = get(ENV, "CI", nothing) == "true",
-      canonical = "https://navidcy.github.io/TurbulentWords.jl/dev/"
+    collapselevel = 2,
+        prettyurls = get(ENV, "CI", nothing) == "true",
+    size_threshold = 2^20,
+         canonical = "https://navidcy.github.io/TurbulentWords.jl/stable/"
 )
 
 makedocs(
@@ -89,7 +86,7 @@ end
 
 deploydocs(       repo = "github.com/navidcy/TurbulentWords.jl.git",
               versions = ["stable" => "v^", "dev" => "dev", "v#.#.#"],
-          push_preview = false,
-              forcepush = true,
-              devbranch = "main"
+          push_preview = true,
+             forcepush = true,
+             devbranch = "main"
           )

@@ -8,7 +8,7 @@ hi = word_to_array("hello",
                    pad_to_square = true,
                    multiplicative_factors = alternating(5))
 
-fig = Figure(resolution=(400, 400))
+fig = Figure(size=(400, 400))
 ax = Axis(fig[1, 1], aspect=1)
 heatmap!(ax, hi, colormap=:balance)
 fig
