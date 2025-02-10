@@ -70,7 +70,7 @@ function word_to_simulation(::Val{:buoyancy_driven}, word;
 end
 
 function add_wizard_and_progress!(simulation)
-    conjure_time_step_wizard!(simulation, cfl=0.7, IterationInterval(5))
+    conjure_time_step_wizard!(simulation, cfl=0.7, IterationInterval(50))
 
     wall_clock = Ref(time_ns())
 
